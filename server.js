@@ -10,7 +10,7 @@ var port = 54321;
 var hostname = 'localhost';
 
 app.get('', function(req, res) {
-    res.sendFile(path.join(__dirname + '/app/html/index.html'));
+    res.sendFile(path.join(__dirname + '/app/index.html'));
 });
 
 // app start running
