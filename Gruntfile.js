@@ -1,20 +1,16 @@
 module.exports = function(grunt) {
   //project configuration
   grunt.initConfig({
-    watch: {
-      files: 'app/css/*.css',
-      tasks: ['css']
-    },
     browserSync: {
       dev: {
         bsFiles: {
           src : [
-            'app/css/*.css',
-            'app/*.html'
+            'app/css/**.css',
+            'app/**.html',
+            'app/js/**.js'
           ]
         },
         options: {
-          watchTask: true,
           server: 'app'
         }
       }
@@ -22,9 +18,8 @@ module.exports = function(grunt) {
   });
 
   // load npm tasks
-  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-browser-sync');
 
   // default
-  grunt.registerTask('default', ['browserSync', 'watch']);
+  grunt.registerTask('default', ['browserSync']);
 }
