@@ -3,23 +3,62 @@
 <head>
     <title>What's The Move</title>
     <!--  Metdatas -->
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
+    <meta name="author" content="Battulga Myagmarjav">
+    <meta name="robots" content="noindex">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- <meta http-equiv="refresh" content="10"> -->
+    <!--  google fonts -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Audiowide">
     <!--  Bootstrap -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/fontawesome/4.6.3/css/font-awesome.css">
+    <!--  custome stylesheet -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/responsive.css">
+
 </head>
 <body>
+    <!--  navigation bar html elements starts here -->
+    <nav class="navbar navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target="#collapse-items" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars fa-lg"></i>
+                </button>
+                <a class="navbar-brand pull-right" href="#"><i class="fa fa-map-marker fa-lg"></i> What The Move</a>
+            </div>
 
-    <nav></nav>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right" id="collapse-items">
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-search fa-fw"></i></span>
+                        <input type="text" class="form-control" placeholder="zipcode">
+                    </div>
+                </form>
+                <ul class="nav navbar-nav">
+                    <li><a href="#">EVENT</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">LOGIN</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">FACEBOOK</a></a></li>
+                            <li><a href="#">TWITTER</a></li>
+                            <li><a href="#">GOOGLE</a></a></li>
+                            <li><a href="#">EMAIL/PHONE</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
 
-    
-
+    <!--  jqeury & bootstrap -->
     <script src="//cdn.jsdelivr.net/jquery/2.2.4/jquery.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
     <!--  Custom Object -->
     <script src="js/navbar.js"></script>
 </body>

@@ -18,8 +18,7 @@ module.exports = function(grunt) {
   });
 
   // load npm tasks
-  grunt.loadNpmTasks('grunt-browser-sync');
-
+  grunt.loadNpmTasks('grunt-browser-sync')
   // default
   grunt.registerTask('default', ['browserSync']);
 }

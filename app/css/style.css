@@ -1,3 +1,21 @@
-body {
-    background-color: yellow;
+.navbar {
+    background-color: #5C5EDC;
+}
+
+.navbar .container-fluid {
+    background-color: #5C5EDC;
+}
+
+.navbar-header .navbar-toggle {
+    color: #fff;
+}
+
+.navbar-header .navbar-brand {
+    font-family: 'Audiowide';
+    color: #fff;
+}
+
+.collapse .nav > li > a {
+    font-family: 'Audiowide';
+    color: #fff;
 }
