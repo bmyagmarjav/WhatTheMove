@@ -66,7 +66,8 @@ function setupStyle() {
 
 function getStyleUrl() {
     var hours = (new Date()).getHours();
-    if (hours > 17 && hours < 7) {
+    console.log(hours);
+    if (hours > 6 && hours < 19) {
         return "json/day-style.json";
     }
     return "json/night-style.json";
