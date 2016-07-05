@@ -1,5 +1,12 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 .navbar {
     background-color: #5C5EDC;
+    height: 55px;
 }
 
 .navbar .container-fluid {
@@ -15,7 +22,33 @@
     color: #fff;
 }
 
+.collapse .navbar-form {
+    margin-top: 10px;
+}
+
 .collapse .nav > li > a {
     font-family: 'Audiowide';
     color: #fff;
+}
+
+.collapse .nav > li > a:hover, .collapse .nav > li > a:focus {
+    background-color: inherit;
+    border-bottom: thick solid #fff;
+}
+
+.map-section {
+    padding-top: 55px;
+    height: 100%;
+    width: 100%;
+}
+
+.event-section {
+    height: 100%;
+    width: 100%;
+    background-color: silver;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
 }
