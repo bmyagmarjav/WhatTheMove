@@ -2,33 +2,22 @@
  * author: Battulga Myagamrjav
  */
 
-var map;
+var map, coordinate;
+var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
+var key = '&key=AIzaSyAJ5NvGs4ZiA7SIu9WPxnP0tKYT1aHlOXo';
 
 function initMap() {
     //geolocation to get current lt and lg for a user
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
+            coordinate = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
-
-            //setup the map
-            map = setupMap(position.coords.latitude, position.coords.longitude);
-            map.setCenter(pos);
-
-            //setup current location marker
-            var currenPositionMarker = new google.maps.Marker({
-                position: pos,
-                map: map,
-                icon: 'img/coolpin.png',
-                // animation: google.maps.Animation.BOUNCE
-            });
-
-            //style the map
-            setupStyle();
-            //draw circle
-            drawCircle();
+            map = setupMap(coordinate);
+            currentCoordinateMarker(coordinate);
+            stylizeMap();
+            //drawCircle();
         }, function() {
             handleLocationError(true);
         });
@@ -38,9 +27,25 @@ function initMap() {
     }
 }
 
-function setupMap(latitude, longitude) {
+$('#search').submit(function(event) {
+    var requestUlr = url + $('#address').val() + key;
+    $.getJSON(requestUlr, function(data) {
+        if (data.status === 'OK') {
+            coordinate = data.results[0].geometry.location
+            map = setupMap(coordinate);
+            currentCoordinateMarker(coordinate);
+            stylizeMap();
+            console.log(coordinate);
+        } else {
+            console.log(data.status);
+        }
+    });
+    event.preventDefault();
+});
+
+function setupMap(coordinate) {
     return new google.maps.Map(document.getElementById('map'), {
-        center: {lat: latitude, lng: longitude},
+        center: coordinate,
         zoom: 11,
         zoomControl: false,
         mapTypeControl: false,
@@ -55,7 +60,16 @@ function setupMap(latitude, longitude) {
     });
 }
 
-function setupStyle() {
+function currentCoordinateMarker(coordinate) {
+    return new google.maps.Marker({
+        position: coordinate,
+        map: map,
+        icon: 'img/coolpin.png',
+        // animation: google.maps.Animation.BOUNCE
+    });
+}
+
+function stylizeMap() {
     var url = getStyleUrl();
     $.getJSON(url, function(data) {
         var style = new google.maps.StyledMapType(data, {name: "Styled Map"});
@@ -66,7 +80,6 @@ function setupStyle() {
 
 function getStyleUrl() {
     var hours = (new Date()).getHours();
-    console.log(hours);
     if (hours > 6 && hours < 19) {
         return "json/day-style.json";
     }
@@ -84,7 +97,6 @@ function drawCircle() {
         center: map.getCenter(),
         radius: 8000 //Math.sqrt(citymap[city].population) * 100
     });
-
 }
 
 function handleLocationError(browserHasGeolocation) {
