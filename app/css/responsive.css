@@ -11,4 +11,7 @@
         margin: auto;
     }
     /* end */
+    .map-section {
+    	margin-top: -20px;
+    }
 }
