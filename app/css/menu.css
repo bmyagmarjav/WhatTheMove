@@ -21,6 +21,11 @@
 	z-index: 1002;
 	color: #5C5EDC;
 	margin: 8px 0 0 8px;
+	background-color: transparent;
+	background-repeat:no-repeat;
+	border: none;
+	cursor:pointer;
+	overflow: hidden;
 }
 
 .open-button {
@@ -28,6 +33,11 @@
 	z-index: 1001;
 	margin: 8px 0 0 8px;
 	color: #fff;
+	background-color: transparent;
+	background-repeat:no-repeat;
+	border: none;
+	cursor:pointer;
+	overflow: hidden;
 }
 
 .icon-list {
