@@ -35,11 +35,16 @@ $('#search').submit(function(event) {
             map = setupMap(coordinate);
             currentCoordinateMarker(coordinate);
             stylizeMap();
-            console.log(coordinate);
+            addDatalistToInput(data);
         } else {
             console.log(data.status);
         }
     });
+
+    // if(event.keyCode === 8) {
+    //     $('#browsers').empty();
+    // }
+    $('#browsers').empty();
     event.preventDefault();
 });
 
@@ -97,6 +102,13 @@ function drawCircle() {
         center: map.getCenter(),
         radius: 8000 //Math.sqrt(citymap[city].population) * 100
     });
+}
+
+function addDatalistToInput(data) {
+    var length = data.results.length;
+    for (var i = 0; i < length; i++) {
+        $('#browsers').append('<option value="' + data.results[i].formatted_address + '">');
+    }
 }
 
 function handleLocationError(browserHasGeolocation) {

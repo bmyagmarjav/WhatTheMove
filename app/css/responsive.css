@@ -10,9 +10,5 @@
         text-align: center;
         margin: auto;
     }
-
-    .navbar-toggle {
-        z-index:3;
-    }
     /* end */
 }

@@ -1,4 +1,4 @@
-/* Author: bmyagmarjav */
+/* Author: Battulga Myagmarjav */
 
 // i:  require
 var express = require("express");

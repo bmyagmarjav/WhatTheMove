@@ -14,29 +14,39 @@
     <!--  Bootstrap -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/fontawesome/4.6.3/css/font-awesome.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/normalize/3.0.3/normalize.css">
     <!--  custome stylesheet -->
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/responsive.css">
-
+    <link rel="stylesheet" type="text/css" href="css/menu.css">
 </head>
 <body>
+    <div class="container">
+        <div class="menu-wrap">
+            <button class="close-button fa fa-times fa-2x pull-left"></button>
+            <nav class="menu">
+                <div class="icon-list">
+                    <a href="#" onclick="location.reload(true);"></i><span>HOME</span></a>
+                    <a href="#event" onclick="hideMenuOnClick();"></i><span>EVENT</span></a>
+                </div>
+            </nav>
+        </div>
+    </div><!-- /container -->
+    <button type="button" class="open-button pull-left" aria-expanded="false"><i class="fa fa-bars fa-2x"></i></button>
+
     <!--  navigation bar html elements starts here -->
     <nav class="navbar navbar-fixed-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target="#collapse-items" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <i class="fa fa-bars fa-lg"></i>
-                </button>
                 <a class="navbar-brand pull-right" href="#"><i class="fa fa-map-marker fa-lg"></i> What The Move</a>
             </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-right" id="collapse-items">
+            <div class="navbar-item navbar-right">
                 <form class="navbar-form navbar-left" id="search" role="search">
                     <div class="input-group">
-                        <input type="text" class="form-control" id="address" placeholder="address">
+                        <input type="text" list="browsers" class="form-control" id="address" placeholder="address">
+                        <datalist id="browsers"></datalist>
                         <span class="input-group-addon right"><i class="fa fa-search fa-fw"></i></span>
                     </div>
                 </form>
@@ -67,7 +77,7 @@
     <!--  jqeury & bootstrap -->
     <script src="//cdn.jsdelivr.net/jquery/2.2.4/jquery.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <!--  Custom Object -->
+    <!--  Custom -->
     <script src="js/navbar.js"></script>
     <!--  Google Map -->
     <script src="js/map-service.js"></script>

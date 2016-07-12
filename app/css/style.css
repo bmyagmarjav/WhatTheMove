@@ -1,70 +1,67 @@
 html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
 }
 
 .navbar {
-    background-color: #5C5EDC;
-    height: 55px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+	background-color: #5C5EDC;
+	height: 55px;
+	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+	width: 100%;
 }
 
 .navbar .container-fluid {
-    background-color: #5C5EDC;
-}
-
-.navbar-header .navbar-toggle {
-    color: #fff;
+	background-color: #5C5EDC;
 }
 
 .navbar-header .navbar-brand {
-    font-family: 'Audiowide';
-    color: #fff;
+	font-family: 'Audiowide';
+	color: #fff;
 }
 
-.collapse .navbar-form {
-    margin-top: 10px;
+.navbar-item .navbar-form {
+	margin-top: 10px;
 }
 
 .form-control {
-    border-right: none;
+	border-right: none;
 }
 
 .form-control:focus {
-  border-color:#ccc;
-  outline: 0;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+	border-color:#ccc;
+	outline: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
 }
 
 .input-group-addon {
-    background-color: #fff;
+	background-color: #fff;
 }
 
-.collapse .nav > li > a {
-    font-family: 'Audiowide';
-    color: #fff;
+.navbar-item .nav > li > a {
+	font-family: 'Audiowide';
+	color: #fff;
 }
 
-.collapse .nav > li > a:hover, .collapse .nav > li > a:focus {
-    background-color: inherit;
-    border-bottom: thick solid #fff;
+.navbar-item .nav > li > a:hover, .collapse .nav > li > a:focus {
+	background-color: inherit;
+	border-bottom: thick solid #fff;
 }
 
 .map-section {
-    padding-top: 55px;
-    height: 100%;
-    width: 100%;
+	margin-top: -20px;
+	height: 100%;
+	width: 100%;
 }
 
 .event-section {
-    height: 100%;
-    width: 100%;
-    background-color: silver;
+	height: 100%;
+	width: 100%;
+	background-color: silver;
 }
 
 #map {
-    height: 100%;
-    width: 100%;
+	height: 100%;
+	width: 100%;
 }
