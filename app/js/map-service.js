@@ -2,9 +2,9 @@
  * author: Battulga Myagamrjav
  */
 
-var map, coordinate;
-var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
-var key = '&key=AIzaSyAJ5NvGs4ZiA7SIu9WPxnP0tKYT1aHlOXo';
+var map, coordinate,
+    url = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
+    key = '&key=AIzaSyAJ5NvGs4ZiA7SIu9WPxnP0tKYT1aHlOXo';
 
 function initMap() {
     //geolocation to get current lt and lg for a user
@@ -18,6 +18,7 @@ function initMap() {
             currentCoordinateMarker(coordinate);
             stylizeMap();
             //drawCircle();
+            makeMapResposive();
         }, function() {
             handleLocationError(true);
         });
@@ -107,8 +108,18 @@ function drawCircle() {
 function addDatalistToInput(data) {
     var length = data.results.length;
     for (var i = 0; i < length; i++) {
-        $('#browsers').append('<option value="' + data.results[i].formatted_address + '">');
+        $('#browsers').append(
+            '<option value="' + data.results[i].formatted_address + '">'
+        );
     }
+}
+
+function makeMapResposive() {
+    google.maps.event.addDomListener(window, "resize", function() {
+        var center = map.getCenter();
+        google.maps.event.trigger(map, "resize");
+        map.setCenter(center);
+    });
 }
 
 function handleLocationError(browserHasGeolocation) {
