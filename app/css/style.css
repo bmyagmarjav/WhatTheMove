@@ -47,7 +47,7 @@ html, body {
 .navbar-item .nav > li > a:focus,
 .navbar-item .nav > li > a:active {
 	background-color: inherit;
-	border-bottom: thick solid #fff;
+	border-bottom: 2px solid #fff;
 }
 
 .map-section {

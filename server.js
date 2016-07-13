@@ -15,5 +15,6 @@ app.get('', function(req, res) {
 
 // app start running
 app.listen(port, hostname, function() {
-  console.log("What's The Move - start : %s:%s", hostname, port);
+    console.log(process.env.PWD);
+    console.log("What's The Move - start : %s:%s", hostname, port);
 });
