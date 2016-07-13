@@ -6,7 +6,6 @@ html, body {
 
 .navbar {
 	background-color: #5C5EDC;
-	height: 55px;
 	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 	width: 100%;
 }
@@ -52,7 +51,7 @@ html, body {
 }
 
 .map-section {
-	margin-top: 55px;
+	margin-top: 50px;
 	height: 100%;
 	width: 100%;
 }

@@ -1,5 +1,4 @@
 /* author: Battulga Myagmarjav */
-
 var navbar = $('.navbar');
 var navbarItem = $('.navbar-item');
 var openButton = $('.open-button');
