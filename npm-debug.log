@@ -1,14 +1,14 @@
 0 info it worked if it ends with ok
 1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'start' ]
-2 info using npm@3.9.3
-3 info using node@v6.2.1
+2 info using npm@3.9.5
+3 info using node@v6.2.2
 4 verbose run-script [ 'prestart', 'start', 'poststart' ]
 5 info lifecycle wtm@0.0.1~prestart: wtm@0.0.1
 6 silly lifecycle wtm@0.0.1~prestart: no script for prestart, continuing
 7 info lifecycle wtm@0.0.1~start: wtm@0.0.1
 8 verbose lifecycle wtm@0.0.1~start: unsafe-perm in lifecycle true
-9 verbose lifecycle wtm@0.0.1~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/iCodice/Desktop/WhatTheMove/node_modules/.bin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-10 verbose lifecycle wtm@0.0.1~start: CWD: /Users/iCodice/Desktop/WhatTheMove
+9 verbose lifecycle wtm@0.0.1~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/Tulga/Desktop/WhatsTheMove/node_modules/.bin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+10 verbose lifecycle wtm@0.0.1~start: CWD: /Users/Tulga/Desktop/WhatsTheMove
 11 silly lifecycle wtm@0.0.1~start: Args: [ '-c', 'node server.js' ]
 12 silly lifecycle wtm@0.0.1~start: Returned: code: 1  signal: null
 13 info lifecycle wtm@0.0.1~start: Failed to exec start script
@@ -23,11 +23,11 @@
 14 verbose stack     at maybeClose (internal/child_process.js:852:16)
 14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:215:5)
 15 verbose pkgid wtm@0.0.1
-16 verbose cwd /Users/iCodice/Desktop/WhatTheMove
+16 verbose cwd /Users/Tulga/Desktop/WhatsTheMove
 17 error Darwin 15.5.0
 18 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "start"
-19 error node v6.2.1
-20 error npm  v3.9.3
+19 error node v6.2.2
+20 error npm  v3.9.5
 21 error code ELIFECYCLE
 22 error wtm@0.0.1 start: `node server.js`
 22 error Exit status 1
