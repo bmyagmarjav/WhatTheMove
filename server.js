@@ -15,11 +15,10 @@ app.get('', function(req, res) {
 
 var TOKEN = '4SN5ZBRXKMLA5K424O2Z'
 var eventbrite = require('./eventbrite');
-
 eventbrite.initiliaze(TOKEN);
 eventbrite.setLocation('41.787650', '-88.157957');
-eventbrite.getCurrentEvents(function(events) {
-    console.log(events);
+eventbrite.getCurrentEvents(function(e) {
+    console.log(e);
 });
 
 // app start running
