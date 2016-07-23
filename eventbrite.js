@@ -37,18 +37,17 @@ exports.getCurrentEvents = function(callback) {
             var events = response.body.events;
             var total = response.body.events.length;
             console.log(total);
+            var requestCount = 0;
             for (var i = 0; i < total; i++) {
                 var current = new Date();
                 var start = new Date(events[i].start.utc);
                 var end = new Date(events[i].end.utc);
-                if (start < current && current < end) {
-                    console.log("current - " + current + " " + events[i].name.text);
-                    console.log("start - " + start);
-                    console.log("end - " + end);
+                if (start < current && current < end && requestCount < 40) {
                     var data = events[i].name.text;
                     getEventWithCoordinate(events, i, data, function(e) {
                         callback(e);
                     });
+                    requestCount++;
                 }
             }
         } else {
