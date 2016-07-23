@@ -6,6 +6,8 @@ var map, coordinate,
     url = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
     key = '&key=AIzaSyAJ5NvGs4ZiA7SIu9WPxnP0tKYT1aHlOXo';
 
+var socket = io();
+
 function initMap() {
     //geolocation to get current lt and lg for a user
     if (navigator.geolocation) {
@@ -14,11 +16,16 @@ function initMap() {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
+
+            //send the user coordinate to server
+            socket.emit('user-coordinate', coordinate);
+
             map = setupMap(coordinate);
-            currentCoordinateMarker(coordinate);
+            userCoordinateMarker(coordinate);
             stylizeMap();
             //drawCircle();
             makeMapResposive();
+            eventsOnMap();
         }, function() {
             handleLocationError(true);
         });
@@ -66,7 +73,16 @@ function setupMap(coordinate) {
     });
 }
 
-function currentCoordinateMarker(coordinate) {
+function userCoordinateMarker(coordinate) {
+    return new google.maps.Marker({
+        position: coordinate,
+        map: map,
+        icon: 'img/coolpin.png',
+        // animation: google.maps.Animation.BOUNCE
+    });
+}
+
+function eventCoordinateMarker(coordinate) {
     return new google.maps.Marker({
         position: coordinate,
         map: map,
@@ -92,6 +108,7 @@ function getStyleUrl() {
     return "json/night-style.json";
 }
 
+// this is not used ~ future reference
 function drawCircle() {
     return new google.maps.Circle({
         strokeColor: '#5C5EDC',
@@ -126,4 +143,14 @@ function handleLocationError(browserHasGeolocation) {
 	console.log(browserHasGeolocation ?
                 'Error: The Geolocation service failed.' :
                         'Error: Your browser doesn\'t support geolocation.');
+}
+
+function eventsOnMap() {
+    //receive all events currently happenning
+    socket.on('event', function(event) {
+        eventCoordinateMarker({
+            lat: parseFloat(event.location.latitude),
+            lng: parseFloat(event.location.longitude)
+        });
+    });
 }
