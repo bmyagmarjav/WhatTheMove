@@ -82,15 +82,6 @@ function userCoordinateMarker(coordinate) {
     });
 }
 
-function eventCoordinateMarker(coordinate) {
-    return new google.maps.Marker({
-        position: coordinate,
-        map: map,
-        icon: 'img/coolpin.png',
-        // animation: google.maps.Animation.BOUNCE
-    });
-}
-
 function stylizeMap() {
     var url = getStyleUrl();
     $.getJSON(url, function(data) {
@@ -145,12 +136,37 @@ function handleLocationError(browserHasGeolocation) {
                         'Error: Your browser doesn\'t support geolocation.');
 }
 
+/* EVENT handlers starts here */
 function eventsOnMap() {
     //receive all events currently happenning
     socket.on('event', function(event) {
-        eventCoordinateMarker({
+        var marker = eventCoordinateMarker({
             lat: parseFloat(event.location.latitude),
             lng: parseFloat(event.location.longitude)
         });
+
+        insertInfoWindow(event.name, marker);
+    });
+}
+
+function eventCoordinateMarker(coordinate) {
+    return new google.maps.Marker({
+        position: coordinate,
+        map: map,
+        icon: 'img/coolpin.png',
+        // animation: google.maps.Animation.BOUNCE
+    });
+}
+
+function insertInfoWindow(name, marker) {
+    var contentString =
+        '<div id="content">'+
+            '<h5>' + name + '</h5>'
+        '</div>';
+    var infowindow = new google.maps.InfoWindow({
+        content: contentString
+    });
+    marker.addListener('click', function() {
+        infowindow.open(map, marker);
     });
 }
