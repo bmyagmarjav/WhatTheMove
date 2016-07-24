@@ -13,6 +13,7 @@ var Util  = {
     VENUES : '/venues/',
     WITHIN : '&location.within=50mi',
     START : '&start_date.keyword=today'
+    SORT : '&sort_by=distance'
 }
 
 var url, userToken;
@@ -23,11 +24,12 @@ exports.initiliaze = function(token) {
         throw "Token is undefined or empty!";
     }
     userToken = token;
-    url = Util.BASE+Util.SEARCH+'/?token='+token+Util.WITHIN+Util.START;
+    url = Util.BASE + Util.SEARCH + '/?token=' + token
+    url += Util.WITHIN + Util.START + Util.SORT;
 }
 
 exports.setLocation = function(latitude, longitude) {
-    url += '&location.latitude='+latitude+'&location.longitude='+longitude;
+    url += '&location.latitude=' + latitude + '&location.longitude=' +longitude;
     console.log(url);
 }
 
