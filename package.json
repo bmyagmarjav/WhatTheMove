@@ -1,34 +1,34 @@
 {
-  "name": "wtm",
-  "version": "0.0.1",
-  "description": "single landing page centralized event finder/displayer application based on geolocation...",
-  "main": "server.js",
-  "scripts": {
-    "test": "grunt nodeunit"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bmyagmarjav/WhatTheMove.git"
-  },
-  "keywords": [
-    "npm",
-    "search"
-  ],
-  "author": "bmyagmarjav",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/bmyagmarjav/WhatTheMove/issues"
-  },
-  "homepage": "https://github.com/bmyagmarjav/WhatTheMove#readme",
-  "dependencies": {
-    "express": "^4.14.0",
-    "socket.io": "^1.4.8"
-  },
-  "devDependencies": {
-    "browser-sync": "^2.13.0",
-    "gulp": "^3.9.1",
-    "gulp-nodemon": "^2.1.0",
-    "request": "^2.73.0",
-    "unirest": "^0.5.0"
-  }
+    "name": "wtm",
+    "version": "0.0.1",
+    "description": "single landing page centralized event finder/displayer application based on geolocation...",
+    "main": "server.js",
+    "scripts": {
+        "start": "gulp"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/bmyagmarjav/WhatTheMove.git"
+    },
+    "keywords": [
+        "npm",
+        "search"
+    ],
+    "author": "bmyagmarjav",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/bmyagmarjav/WhatTheMove/issues"
+    },
+    "homepage": "https://github.com/bmyagmarjav/WhatTheMove#readme",
+    "dependencies": {
+        "express": "^4.14.0",
+        "socket.io": "^1.4.8"
+    },
+    "devDependencies": {
+        "browser-sync": "^2.13.0",
+        "gulp": "^3.9.1",
+        "gulp-nodemon": "^2.1.0",
+        "request": "^2.73.0",
+        "unirest": "^0.5.0"
+    }
 }
