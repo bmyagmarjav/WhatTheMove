@@ -4,15 +4,16 @@
 * author: Battulga Myagmarjav
 ******************************************************************************/
 'use strict'
-var unirest = require('unirest');
 var exports = module.exports;
+var MAX_REQUEST = 40;
+var request = require('request');
 
 var Util  = {
     BASE : 'https://www.eventbriteapi.com/v3',
     SEARCH : '/events/search',
     VENUES : '/venues/',
     WITHIN : '&location.within=50mi',
-    START : '&start_date.keyword=today'
+    START : '&start_date.keyword=today',
     SORT : '&sort_by=distance'
 }
 
@@ -34,18 +35,19 @@ exports.setLocation = function(latitude, longitude) {
 }
 
 exports.getCurrentEvents = function(callback) {
-    unirest.get(url).end(function(response) {
+    request(url, function(error, response, body) {
         if (response.statusCode == 200) {
-            var events = response.body.events;
-            var total = response.body.events.length;
+            var jsonBody = JSON.parse(body);
+            var events = jsonBody.events;
+            var total = events.length;
             console.log(total);
             var requestCount = 0;
             for (var i = 0; i < total; i++) {
                 var current = new Date();
                 var start = new Date(events[i].start.utc);
                 var end = new Date(events[i].end.utc);
-                if (start < current && current < end && requestCount < 40) {
-                    var data = events[i].name.text;
+                var data = events[i].name.text;
+                if (requestCount < MAX_REQUEST) {
                     getEventWithCoordinate(events, i, data, function(e) {
                         callback(e);
                     });
@@ -59,10 +61,10 @@ exports.getCurrentEvents = function(callback) {
 }
 
 function getEventWithCoordinate(events, index, data, callback) {
-    var url = Util.BASE+Util.VENUES+events[index].venue_id+'/?token='+userToken;
-    unirest.get(url).end(function(response) {
+    var url = Util.BASE+Util.VENUES+events[index].venue_id+'/?token='+userToken;3
+    request(url, function(error, response, body) {
         if (response.statusCode == 200) {
-            var jsonBody = response.body;
+            var jsonBody = JSON.parse(body);
             callback({
                 name : data,
                 location : {
