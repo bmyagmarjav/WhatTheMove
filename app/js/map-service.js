@@ -59,11 +59,11 @@ $('#search').submit(function(event) {
 function setupMap(coordinate) {
     return new google.maps.Map(document.getElementById('map'), {
         center: coordinate,
-        zoom: 11,
+        zoom: 9,
         zoomControl: false,
         mapTypeControl: false,
         maxZoom: 16,
-        minZoom: 11,
+        minZoom: 9,
         //scrollwheel: false,
         //draggable: false,
         disableDoubleClickZoom: true,
