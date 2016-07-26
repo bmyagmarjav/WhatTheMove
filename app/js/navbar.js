@@ -15,8 +15,19 @@ $(window).resize(function(){
     menuToggle();
 });
 
+$(window).scroll(function() {
+    var distance = $(document).scrollTop();
+    if ($(window).width() > 768) {
+        if (distance > 104) {
+            $(".category-nav").css("display", "none").slideUp("slow");
+        } else {
+            $(".category-nav").css("display", "block").slideDown("slow");
+        }
+    }
+})
+
 function menuToggle() {
-    if ($(window).width() < 768) {
+    if ($(window).width() <= 768) {
         openButton.show();
         togglePositionProperty(fixedTop, staticTop);
     } else {
