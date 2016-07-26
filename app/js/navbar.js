@@ -13,11 +13,8 @@ $(window).ready(function(){
 });
 
 $(window).resize(function(){
+    // console.log($(window).width());
     menuToggle();
-
-    if ($(window).width() <= 768) {
-        centerifyText($(window).width());
-    }
 });
 
 /* hide/show shadow and 2nd navbar when scrolling*/
@@ -38,11 +35,12 @@ $(window).scroll(function() {
 
 function menuToggle() {
     if ($(window).width() <= 768) {
-        openButton.show();
+        $('.menu-wrap').css("width", $(window).width());
+        openButton.css("display", "block");
         categoryNav.css("display", "none");
         togglePositionProperty(fixedTop, staticTop);
     } else {
-        openButton.hide();
+        openButton.css("display", "none");
         categoryNav.css("display", "block");
         togglePositionProperty(staticTop, fixedTop);
         if ($('body').hasClass('show-menu')) {
@@ -60,6 +58,8 @@ function togglePositionProperty(class1, class2) {
 
 function showMenuOnClick() {
     $('.open-button').click(function() {
+        $('body').css("overflow", "hidden");
+        $('.menu-wrap').css("width", $(window).width());
         $('body').addClass('show-menu');
         closeButton.show(400);
         openButton.hide();
@@ -79,8 +79,5 @@ function hideMenuHelper() {
     $('body').removeClass('show-menu');
     closeButton.hide();
     openButton.show(400);
-}
-
-function centerifyText(width) {
-    $('.icon-list a').css("margin-left", width/4);
+    $('body').css("overflow", "visible");
 }
