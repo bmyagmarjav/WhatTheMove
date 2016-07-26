@@ -14,10 +14,34 @@ var Util  = {
     VENUES : '/venues/',
     WITHIN : '&location.within=50mi',
     START : '&start_date.keyword=today',
-    SORT : '&sort_by=distance'
+    SORT : '&sort_by=best'
 }
 
-var url, userToken;
+var url, locUrl, categoryUrl,
+    userToken,
+    isCategory = false;
+
+exports.Category = function() {
+    return {
+        BUSINESS : 101,
+        // SCIENCE : 102,
+        MUSIC : 103,
+        MEDIA : 104,
+        ARTS : 105,
+        // FASHION : 106,
+        // HEALTH : 107,
+        // SPORTS : 108,
+        // OUTDOOR : 109,
+        FOOD : 110,
+        CAUSES : 111,
+        // GOV : 112,
+        COMMUNITY : 113,
+        // RELIGION : 114,
+        // EDUCATION : 115,
+        // HOLIDAY : 116,
+        // HOME : 117
+    };
+}
 
 /* setup url with legal token */
 exports.initiliaze = function(token) {
@@ -29,18 +53,30 @@ exports.initiliaze = function(token) {
     url += Util.WITHIN + Util.START + Util.SORT;
 }
 
-exports.setLocation = function(latitude, longitude) {
-    url += '&location.latitude=' + latitude + '&location.longitude=' +longitude;
-    console.log(url);
+exports.setLocation = function(lat, lng) {
+    locUrl = url + '&location.latitude=' + lat + '&location.longitude=' + lng;
+}
+
+exports.setCategory = function(id) {
+    categoryUrl = locUrl + '&categories=' + id;
+    isCategory = true;
+}
+
+var getUrl = function() {
+    if (isCategory) {
+        return categoryUrl;
+    }
+    return locUrl;
 }
 
 exports.getCurrentEvents = function(callback) {
-    request(url, function(error, response, body) {
-        if (response.statusCode == 200) {
+    console.log(getUrl());
+    request(getUrl(), function(error, response, body) {
+        if (!error && response.statusCode == 200) {
             var jsonBody = JSON.parse(body);
             var events = jsonBody.events;
             var total = events.length;
-            console.log(total);
+            console.log("total event on this page: " + total);
             var requestCount = 0;
             for (var i = 0; i < total; i++) {
                 var current = new Date();
@@ -48,22 +84,22 @@ exports.getCurrentEvents = function(callback) {
                 var end = new Date(events[i].end.utc);
                 var data = events[i].name.text;
                 if (requestCount < MAX_REQUEST) {
-                    getEventWithCoordinate(events, i, data, function(e) {
-                        callback(e);
+                    getEventWithCoordinate(events, i, data, function(anEvent) {
+                        callback(anEvent);
                     });
                     requestCount++;
                 }
             }
         } else {
-            throw "Bad request";
+            throw "Bad request: " + error;
         }
     });
 }
 
 function getEventWithCoordinate(events, index, data, callback) {
-    var url = Util.BASE+Util.VENUES+events[index].venue_id+'/?token='+userToken;3
+    var url = Util.BASE+Util.VENUES+events[index].venue_id+'/?token='+userToken;
     request(url, function(error, response, body) {
-        if (response.statusCode == 200) {
+        if (!error && response.statusCode == 200) {
             var jsonBody = JSON.parse(body);
             callback({
                 name : data,
@@ -73,6 +109,8 @@ function getEventWithCoordinate(events, index, data, callback) {
                     longitude : jsonBody.longitude
                 }
             });
+        } else {
+            throw "Bad request: " + error;
         }
     });
 }
