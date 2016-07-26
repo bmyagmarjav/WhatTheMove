@@ -4,6 +4,7 @@ var openButton = $('.open-button');
 var closeButton = $('.close-button');
 var fixedTop = 'navbar-fixed-top';
 var staticTop = 'navbar-static-top';
+var categoryNav = $(".category-nav");
 
 $(window).ready(function(){
     menuToggle();
@@ -13,25 +14,36 @@ $(window).ready(function(){
 
 $(window).resize(function(){
     menuToggle();
+
+    if ($(window).width() <= 768) {
+        centerifyText($(window).width());
+    }
 });
 
+/* hide/show shadow and 2nd navbar when scrolling*/
 $(window).scroll(function() {
     var distance = $(document).scrollTop();
     if ($(window).width() > 768) {
         if (distance > 104) {
-            $(".category-nav").css("display", "none").slideUp("slow");
+            categoryNav.slideUp("fast");
+            $("#prime").css("box-shadow", "0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)");
         } else {
-            $(".category-nav").css("display", "block").slideDown("slow");
+            categoryNav.slideDown("fast");
+            $("#prime").css("box-shadow", "none");
         }
+    } else {
+        categoryNav.css("display", "none");
     }
 })
 
 function menuToggle() {
     if ($(window).width() <= 768) {
         openButton.show();
+        categoryNav.css("display", "none");
         togglePositionProperty(fixedTop, staticTop);
     } else {
         openButton.hide();
+        categoryNav.css("display", "block");
         togglePositionProperty(staticTop, fixedTop);
         if ($('body').hasClass('show-menu')) {
             $('body').removeClass('show-menu');
@@ -67,4 +79,8 @@ function hideMenuHelper() {
     $('body').removeClass('show-menu');
     closeButton.hide();
     openButton.show(400);
+}
+
+function centerifyText(width) {
+    $('.icon-list a').css("margin-left", width/4);
 }

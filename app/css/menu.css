@@ -1,6 +1,6 @@
 /* Menu */
 .menu-wrap {
-	position: absolute;;
+	position: absolute;
 	z-index: 1001;
 	width: 768px;
 	height: 100%;
@@ -17,7 +17,7 @@
 
 /* Close Button */
 .close-button {
-	position: absolute;;
+	position: absolute;
 	z-index: 1002;
 	color: #5C5EDC;
 	margin: 8px 0 0 8px;
@@ -51,8 +51,7 @@
 	display: block;
 	color: #5C5EDC;
 	padding: 15px;
-	font-size: 20px;
-	margin-left: 120px;
+	font-size: 16px;
 	-webkit-transform: translate3d(0,500px,0);
 	transform: translate3d(0,500px,0);
 }

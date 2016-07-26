@@ -1,12 +1,10 @@
 html, body {
-	overflow: hidden;
 	width: 100%;
 	height: 100%;
 }
 
 .navbar {
 	background-color: #5C5EDC;
-	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 	width: 100%;
 }
 
@@ -57,16 +55,16 @@ html, body {
 
 .navbar-item .nav .dropdown-menu {
 	position: absolute;
-	z-index: 10002;
 	height: 300px;
 	width: 300px;
-	color: yellow;
+	color: black;
 }
 
-
 .category-nav {
+	z-index: 1029;
 	margin-top: 52px;
 	background-color: #424242;
+	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
 .category-nav .nav > li > a {
