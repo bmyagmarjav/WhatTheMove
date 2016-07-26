@@ -10,12 +10,29 @@
         text-align: center;
         margin: auto;
     }
+
+    .navbar-item {
+        display: none;
+    }
+
+    .category-nav {
+        display: none;
+    }
     /* end */
     .map-section {
     	margin-top: -20px;
     }
-
     /* start: stop collapsing */
 
     /* end */
+}
+
+@media screen and (min-width: 769px) {
+    .navbar-item {
+        display: block;
+    }
+
+    .category-nav {
+        display: block;
+    }
 }

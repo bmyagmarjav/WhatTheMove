@@ -1,6 +1,5 @@
 /* author: Battulga Myagmarjav */
 var navbar = $('.navbar');
-var navbarItem = $('.navbar-item');
 var openButton = $('.open-button');
 var closeButton = $('.close-button');
 var fixedTop = 'navbar-fixed-top';
@@ -18,11 +17,9 @@ $(window).resize(function(){
 
 function menuToggle() {
     if ($(window).width() < 768) {
-        navbarItem.hide();
         openButton.show();
         togglePositionProperty(fixedTop, staticTop);
     } else {
-        navbarItem.show();
         openButton.hide();
         togglePositionProperty(staticTop, fixedTop);
         if ($('body').hasClass('show-menu')) {
