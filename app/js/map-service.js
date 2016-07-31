@@ -1,10 +1,11 @@
 /**
- * author: Battulga Myagamrjav
- */
+* author: Battulga Myagamrjav
+*/
 
 var map, coordinate,
-    url = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
-    key = '&key=AIzaSyAJ5NvGs4ZiA7SIu9WPxnP0tKYT1aHlOXo';
+url = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
+key = '&key=AIzaSyAJ5NvGs4ZiA7SIu9WPxnP0tKYT1aHlOXo';
+categoryOn = false;
 
 var socket = io();
 
@@ -56,13 +57,41 @@ $('#search').submit(function(event) {
     event.preventDefault();
 });
 
+$(".cat-science a").click(function() {
+    socket.emit('add-science-events');
+});
+
+$(".cat-arts a").click(function() {
+    socket.emit('add-arts-events');
+});
+
+$(".cat-music a").click(function() {
+    socket.emit('add-music-events');
+});
+
+$(".cat-media a").click(function() {
+    socket.emit('add-media-events');
+});
+
+$(".cat-food a").click(function() {
+    socket.emit('add-food-events');
+});
+
+$(".cat-causes a").click(function() {
+    socket.emit('add-causes-events');
+});
+
+$(".cat-community a").click(function() {
+    socket.emit('add-community-events');
+});
+
 function setupMap(coordinate) {
     return new google.maps.Map(document.getElementById('map'), {
         center: coordinate,
         zoom: 9,
         zoomControl: false,
         mapTypeControl: false,
-        maxZoom: 16,
+        maxZoom: 18,
         minZoom: 9,
         //scrollwheel: false,
         //draggable: false,
@@ -131,9 +160,9 @@ function makeMapResposive() {
 }
 
 function handleLocationError(browserHasGeolocation) {
-	console.log(browserHasGeolocation ?
-                'Error: The Geolocation service failed.' :
-                        'Error: Your browser doesn\'t support geolocation.');
+    console.log(browserHasGeolocation ?
+        'Error: The Geolocation service failed.' :
+        'Error: Your browser doesn\'t support geolocation.');
 }
 
 /* EVENT handlers starts here */
@@ -144,7 +173,6 @@ function eventsOnMap() {
             lat: parseFloat(event.location.latitude),
             lng: parseFloat(event.location.longitude)
         });
-
         insertInfoWindow(event.name, marker);
     });
 }
@@ -160,9 +188,9 @@ function eventCoordinateMarker(coordinate) {
 
 function insertInfoWindow(name, marker) {
     var contentString =
-        '<div id="content">'+
-            '<h5>' + name + '</h5>'
-        '</div>';
+    '<div id="content">'+
+    '<h5>' + name + '</h5>'
+    '</div>';
     var infowindow = new google.maps.InfoWindow({
         content: contentString
     });

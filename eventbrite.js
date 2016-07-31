@@ -24,7 +24,7 @@ var url, locUrl, categoryUrl,
 exports.Category = function() {
     return {
         BUSINESS : 101,
-        // SCIENCE : 102,
+        SCIENCE : 102,
         MUSIC : 103,
         MEDIA : 104,
         ARTS : 105,
@@ -55,6 +55,7 @@ exports.initiliaze = function(token) {
 
 exports.setLocation = function(lat, lng) {
     locUrl = url + '&location.latitude=' + lat + '&location.longitude=' + lng;
+    isCategory = false;
 }
 
 exports.setCategory = function(id) {
