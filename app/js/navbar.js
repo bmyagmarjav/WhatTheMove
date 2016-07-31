@@ -1,15 +1,13 @@
 /* author: Battulga Myagmarjav */
 var navbar = $('.navbar');
-var openButton = $('.open-button');
-var closeButton = $('.close-button');
+var menuButton = $('.menu-button');
 var fixedTop = 'navbar-fixed-top';
 var staticTop = 'navbar-static-top';
 var categoryNav = $(".category-nav");
 
 $(window).ready(function(){
     menuToggle();
-    showMenuOnClick();
-    hideMenuOnClick();
+    toggleSideMenu();
 });
 
 $(window).resize(function(){
@@ -36,16 +34,13 @@ $(window).scroll(function() {
 function menuToggle() {
     if ($(window).width() <= 768) {
         $('.menu-wrap').css("width", $(window).width());
-        openButton.css("display", "block");
+        menuButton.css("display", "block");
         categoryNav.css("display", "none");
         togglePositionProperty(fixedTop, staticTop);
     } else {
-        openButton.css("display", "none");
+        menuButton.css("display", "none");
         categoryNav.css("display", "block");
         togglePositionProperty(staticTop, fixedTop);
-        if ($('body').hasClass('show-menu')) {
-            $('body').removeClass('show-menu');
-        }
     }
 }
 
@@ -56,28 +51,21 @@ function togglePositionProperty(class1, class2) {
     navbar.addClass(class2);
 }
 
-function showMenuOnClick() {
-    $('.open-button').click(function() {
-        $('body').css("overflow", "hidden");
-        $('.menu-wrap').css("width", $(window).width());
-        $('body').addClass('show-menu');
-        closeButton.show(400);
-        openButton.hide();
+function toggleSideMenu() {
+    menuButton.click(function() {
+        var isActive = $('#nav-menu-toggle').hasClass('active');
+        if (isActive) {
+            $('body').css("overflow", "hidden");
+            $('.menu-wrap').css("width", $(window).width());
+            $('body').addClass('show-menu');
+        } else {
+            $('body').css("overflow", "visible");
+            $('body').removeClass('show-menu');
+        }
     });
 }
 
-function hideMenuOnClick() {
-    $('.close-button').click(function() {
-        hideMenuHelper();
-    });
-    $('.icon-list a span').click(function() {
-        hideMenuHelper();
-    });
-}
-
-function hideMenuHelper() {
-    $('body').removeClass('show-menu');
-    closeButton.hide();
-    openButton.show(400);
-    $('body').css("overflow", "visible");
-}
+/* nav menu button toggler */
+$("#nav-menu-toggle").click(function() {
+    $(this).toggleClass("active");
+});
