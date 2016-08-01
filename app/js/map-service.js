@@ -181,7 +181,7 @@ function eventCoordinateMarker(coordinate) {
     return new google.maps.Marker({
         position: coordinate,
         map: map,
-        icon: 'img/coolpin.png',
+        icon: 'img/eventMarker.png',
         // animation: google.maps.Animation.BOUNCE
     });
 }
