@@ -1,6 +1,8 @@
-/**
-* author: Battulga Myagamrjav
-*/
+/******************************************************************************
+* Everything google map api offers implemented here for this project
+*
+* author: Battulga Myagmarjav
+******************************************************************************/
 
 var map, coordinate,
 url = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
@@ -173,7 +175,8 @@ function eventsOnMap() {
             lat: parseFloat(event.location.latitude),
             lng: parseFloat(event.location.longitude)
         });
-        insertInfoWindow(event.info.name, marker);
+        var info = event.info;
+        insertInfoWindow(info.name, info.url, info.date, marker);
     });
 }
 
@@ -186,12 +189,15 @@ function placeEventMarkerAt(coordinate) {
     });
 }
 
-function insertInfoWindow(name, marker) {
+function insertInfoWindow(name, url, date, marker) {
     var contentString =
-        '<div id="content">'+
-        '<h5>' + name + '</h5>'
+        '<div class="infowindow">'+
+            '<a class="link" href=' + url + '>' + name + '</a>' +
+            '<div class="line"></div>' +
+            '<p> Start : ' + date.start + '</p>' +
+            '<p> End : ' + date.end + '</p>' +
         '</div>';
-        
+
     var infowindow = new google.maps.InfoWindow({
         content: contentString
     });

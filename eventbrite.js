@@ -88,7 +88,11 @@ exports.getCurrentEvents = function(callback) {
                     name : e.name.text,
                     description : e.description.text,
                     capacity : e.capacity,
-                    url : e.url
+                    url : e.url,
+                    date : {
+                        start : start.toLocaleString(),
+                        end : end.toLocaleString()
+                    }
                 }
                 if (requestCount < MAX_REQUEST) {
                     getEventWithCoordinate(events, i, data, function(anEvent) {

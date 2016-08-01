@@ -99,3 +99,28 @@ html, body {
 	height: 100%;
 	width: 100%;
 }
+
+.infowindow {
+	width: 200px;
+	text-align: center;
+}
+
+.infowindow .link {
+	color: #5C5EDC;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.infowindow .link:hover {
+	text-decoration: none;
+}
+
+.infowindow .line {
+	margin-top: 15px;
+	border-bottom: 1px solid silver;
+	margin-bottom: 15px;
+}
+
+.infowindow p {
+	font-weight: bold;
+}
