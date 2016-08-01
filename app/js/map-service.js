@@ -22,7 +22,7 @@ function initMap() {
             socket.emit('user-coordinate', coordinate);
 
             map = setupMap(coordinate);
-            userCoordinateMarker(coordinate);
+            placeUserMarkerAt(coordinate);
             stylizeMap();
             //drawCircle();
             makeMapResposive();
@@ -102,12 +102,12 @@ function setupMap(coordinate) {
     });
 }
 
-function userCoordinateMarker(coordinate) {
+function placeUserMarkerAt(coordinate) {
     return new google.maps.Marker({
         position: coordinate,
         map: map,
         icon: 'img/coolpin.png',
-        // animation: google.maps.Animation.BOUNCE
+        animation: google.maps.Animation.BOUNCE
     });
 }
 
@@ -169,15 +169,15 @@ function handleLocationError(browserHasGeolocation) {
 function eventsOnMap() {
     //receive all events currently happenning
     socket.on('event', function(event) {
-        var marker = eventCoordinateMarker({
+        var marker = placeEventMarkerAt({
             lat: parseFloat(event.location.latitude),
             lng: parseFloat(event.location.longitude)
         });
-        insertInfoWindow(event.name, marker);
+        insertInfoWindow(event.info.name, marker);
     });
 }
 
-function eventCoordinateMarker(coordinate) {
+function placeEventMarkerAt(coordinate) {
     return new google.maps.Marker({
         position: coordinate,
         map: map,
@@ -188,9 +188,10 @@ function eventCoordinateMarker(coordinate) {
 
 function insertInfoWindow(name, marker) {
     var contentString =
-    '<div id="content">'+
-    '<h5>' + name + '</h5>'
-    '</div>';
+        '<div id="content">'+
+        '<h5>' + name + '</h5>'
+        '</div>';
+        
     var infowindow = new google.maps.InfoWindow({
         content: contentString
     });

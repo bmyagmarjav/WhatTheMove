@@ -81,9 +81,15 @@ exports.getCurrentEvents = function(callback) {
             var requestCount = 0;
             for (var i = 0; i < total; i++) {
                 var current = new Date();
-                var start = new Date(events[i].start.utc);
-                var end = new Date(events[i].end.utc);
-                var data = events[i].name.text;
+                var e = events[i];
+                var start = new Date(e.start.utc);
+                var end = new Date(e.end.utc);
+                var data = {
+                    name : e.name.text,
+                    description : e.description.text,
+                    capacity : e.capacity,
+                    url : e.url
+                }
                 if (requestCount < MAX_REQUEST) {
                     getEventWithCoordinate(events, i, data, function(anEvent) {
                         callback(anEvent);
@@ -103,7 +109,7 @@ function getEventWithCoordinate(events, index, data, callback) {
         if (!error && response.statusCode == 200) {
             var jsonBody = JSON.parse(body);
             callback({
-                name : data,
+                info : data,
                 location : {
                     address : jsonBody.address.localized_address_display,
                     latitude : jsonBody.latitude,
