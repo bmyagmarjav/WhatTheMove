@@ -7,6 +7,7 @@
 var exports = module.exports;
 var MAX_REQUEST = 40;
 var request = require('request');
+var async = require('async');
 
 var Util  = {
     BASE : 'https://www.eventbriteapi.com/v3',
@@ -18,8 +19,8 @@ var Util  = {
 }
 
 var url, locUrl, categoryUrl,
-    userToken,
-    isCategory = false;
+userToken,
+isCategory = false;
 
 exports.Category = function() {
     return {
@@ -79,49 +80,59 @@ exports.getCurrentEvents = function(callback) {
             var total = events.length;
             console.log("total event on this page: " + total);
             var requestCount = 0;
+
+            var collection = [];
+
             for (var i = 0; i < total; i++) {
                 var current = new Date();
-                var e = events[i];
-                var start = new Date(e.start.utc);
-                var end = new Date(e.end.utc);
+                var event = events[i];
+                var start = new Date(event.start.utc);
+                var end = new Date(event.end.utc);
                 var data = {
-                    name : e.name.text,
-                    description : e.description.text,
-                    capacity : e.capacity,
-                    url : e.url,
+                    name : event.name.text,
+                    description : event.description.text,
+                    capacity : event.capacity,
+                    url : event.url,
                     date : {
                         start : start.toLocaleString(),
                         end : end.toLocaleString()
                     }
                 }
+
                 if (requestCount < MAX_REQUEST) {
-                    getEventWithCoordinate(events, i, data, function(anEvent) {
-                        callback(anEvent);
+                    collection.push({
+                        url : Util.BASE+Util.VENUES+event.venue_id+'/?token='+userToken,
+                        data : data
                     });
                     requestCount++;
                 }
             }
+
+            getEventWithCoordinate(collection, function(all) {
+                callback(all);
+            });
         } else {
-            throw "Bad request: " + error;
+            throw error;
         }
     });
 }
 
-function getEventWithCoordinate(events, index, data, callback) {
-    var url = Util.BASE+Util.VENUES+events[index].venue_id+'/?token='+userToken;
-    request(url, function(error, response, body) {
-        if (!error && response.statusCode == 200) {
+function getEventWithCoordinate(events, callback) {
+    console.log(events.length);
+    async.map(events, function(event, callback) {
+        request(event.url, function(error, response, body) {
+            // Some processing is happening here before the callback is invoked
             var jsonBody = JSON.parse(body);
-            callback({
-                info : data,
+            callback(error, {
+                info : event.data,
                 location : {
                     address : jsonBody.address.localized_address_display,
                     latitude : jsonBody.latitude,
                     longitude : jsonBody.longitude
                 }
             });
-        } else {
-            throw "Bad request: " + error;
-        }
+        });
+    }, function(error, coordinatedEvents) {
+        callback(coordinatedEvents);
     });
 }
