@@ -67,8 +67,9 @@ io.on('connection', function(socket) {
 });
 
 function sendEvents() {
-    eventbrite.getCurrentEvents(function(anEvent) {
-        io.emit('event', anEvent);
+    eventbrite.getCurrentEvents(function(events) {
+        // console.log(events);
+        io.emit('events', events);
     });
 }
 
