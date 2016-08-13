@@ -4,10 +4,10 @@
 * author: Battulga Myagmarjav
 ******************************************************************************/
 
-var map, coordinate,
-url = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
-key = '&key=AIzaSyAJ5NvGs4ZiA7SIu9WPxnP0tKYT1aHlOXo';
-categoryOn = false;
+var map, coordinate, heatmap,
+    url = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
+    key = '&key=AIzaSyAJ5NvGs4ZiA7SIu9WPxnP0tKYT1aHlOXo';
+    categoryOn = false;
 
 var socket = io();
 
@@ -169,14 +169,25 @@ function handleLocationError(browserHasGeolocation) {
 
 /* EVENT handlers starts here */
 function eventsOnMap() {
-    //receive all events currently happenning
-    socket.on('event', function(event) {
-        var marker = placeEventMarkerAt({
-            lat: parseFloat(event.location.latitude),
-            lng: parseFloat(event.location.longitude)
-        });
-        var info = event.info;
-        insertInfoWindow(info.name, info.url, info.date, marker);
+    //receive all events currently happening
+    socket.on('events', function(events) {
+        var coordinates = [];
+        for (var i = 0; i < events.length; i++) {
+            var lat = parseFloat(events[i].location.latitude);
+            var lng = parseFloat(events[i].location.longitude);
+            var marker = placeEventMarkerAt({
+                lat: lat,
+                lng: lng
+            });
+            var info = events[i].info;
+            insertInfoWindow(info.name, info.url, info.date, marker);
+            coordinates.push({
+                location: new google.maps.LatLng(lat, lng),
+                weight: events[i].info.capacity
+            });
+        }
+        console.log(coordinates);
+        visualizeHeatmap(coordinates);
     });
 }
 
@@ -201,7 +212,35 @@ function insertInfoWindow(name, url, date, marker) {
     var infowindow = new google.maps.InfoWindow({
         content: contentString
     });
-    marker.addListener('click', function() {
-        infowindow.open(map, marker);
+    google.maps.event.addListener(marker, 'click', function() {
+        infowindow.open(map, this);
     });
+}
+
+function visualizeHeatmap(coordinates) {
+    heatmap = new google.maps.visualization.HeatmapLayer({
+        data: coordinates,
+		map: map,
+	    gradient: getGradient(),
+		radius: 20
+    });
+}
+
+function getGradient() {
+    return [
+        'rgba(0, 255, 255, 0)',
+        'rgba(0, 255, 255, 1)',
+        'rgba(0, 191, 255, 1)',
+        'rgba(0, 127, 255, 1)',
+        'rgba(0, 63, 255, 1)',
+        'rgba(0, 0, 255, 1)',
+        'rgba(0, 0, 223, 1)',
+        'rgba(0, 0, 191, 1)',
+        'rgba(0, 0, 159, 1)',
+        'rgba(0, 0, 127, 1)',
+        'rgba(63, 0, 91, 1)',
+        'rgba(127, 0, 63, 1)',
+        'rgba(191, 0, 31, 1)',
+        'rgba(255, 0, 0, 1)'
+    ];
 }
