@@ -43,9 +43,16 @@ $('#search').submit(function(event) {
     $.getJSON(requestUlr, function(data) {
         if (data.status === 'OK') {
             coordinate = data.results[0].geometry.location
+            
+            //send the user coordinate to server
+            socket.emit('user-coordinate', coordinate);
+
             map = setupMap(coordinate);
-            currentCoordinateMarker(coordinate);
+            placeUserMarkerAt(coordinate);
             stylizeMap();
+            //drawCircle();
+            makeMapResposive();
+            eventsOnMap();
             addDatalistToInput(data);
         } else {
             console.log(data.status);
