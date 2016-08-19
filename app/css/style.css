@@ -89,12 +89,6 @@ html, body {
 	width: 100%;
 }
 
-.event-section {
-	height: 100%;
-	width: 100%;
-	background-color: silver;
-}
-
 #map {
 	height: 100%;
 	width: 100%;
@@ -123,4 +117,49 @@ html, body {
 
 .infowindow p {
 	font-weight: bold;
+}
+
+.event-section {
+	height: 100%;
+	width: 100%;
+	background-color: rgb(238, 238, 238);
+}
+
+.event-header {
+	margin-top: 80px;
+	font-family: 'Audiowide';
+	font-size: 20px;
+}
+
+.light-box {
+	background-color: #fff;
+	margin-top: 20px;
+	height: 150px;
+	-webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	-moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+footer a {
+	color: #a1a9b0;
+}
+
+footer { background-color: #424242; padding: 40px 0 30px; }
+
+footer p { color: #fff; }
+
+ul.legals { list-style: none; color: #fff; line-height: 25px; }
+
+ul.legals li { display: inline-block; }
+
+ul.legals li::after { content: " |"; }
+
+ul.legals li:last-child::after { content: ""; }
+
+.legals {
+	text-align: left;
+}
+
+.credit {
+	text-align: right;
 }
